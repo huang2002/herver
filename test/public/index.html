@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1" />
+    <title>/public/index.html</title>
+    <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+    <h1>This is the test page of <code>herver</code></h1>
+    <p class="red">This line should be red</p>
+    <p>There should be no errors in the console</p>
+    <nav><a href="/res">/res</a></nav>
+    <script type="module" src="./foo.js"></script>
+    <script>
+        fetch('./res/data.json')
+            .then(res => res.json())
+            .then(data => {
+                console.assert(data.msg === 'test');
+            }, err => {
+                console.error(err);
+            });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,9 @@
+code {
+    padding: .1em .4em;
+    background-color: #EEE;
+    border-radius: .2em;
+}
+
+.red {
+    color: red;
+}
