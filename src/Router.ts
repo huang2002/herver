@@ -11,7 +11,7 @@ export interface Route {
 
 export class Router {
 
-    storeKey = 'ROUTE_RESULT';
+    storeKey = 'ROUTING_RESULT';
     routes = new Array<Route>();
     readonly handler: QueryHandler = this._handler.bind(this);
 
@@ -23,12 +23,12 @@ export class Router {
             { path } = context;
         for (let i = 0; i < routes.length; i++) {
             const { description } = routes[i],
-                routeResult = typeof description === 'string' ?
+                routingResult = typeof description === 'string' ?
                     description === path :
                     path.match(description);
-            if (routeResult) {
+            if (routingResult) {
                 const { storeKey } = this;
-                context.store[storeKey] = routeResult;
+                context.store[storeKey] = routingResult;
                 await routes[i].handler(context, next);
                 delete context.store[storeKey];
                 return;
