@@ -28,5 +28,9 @@
   "devDependencies": {
     "@types/node": "^12.12.17",
     "typescript": "^3.7.3"
-  }
+  },
+  "files": [
+    "typings",
+    "dist"
+  ]
 }
