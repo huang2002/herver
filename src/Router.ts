@@ -16,7 +16,7 @@ export class Router {
     readonly handler: QueryHandler = this._handler.bind(this);
 
     private async _handler(context: QueryContext, next: NextCallback) {
-        if (context.response.writableEnded) {
+        if (context.ended) {
             return;
         }
         const { routes } = this,
