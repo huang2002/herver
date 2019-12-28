@@ -286,11 +286,11 @@ class Router {
      * ```js
      * router.get('/foo', async (context, next) => {
      *     // this will always be `true`
-     *     const routingResults = context.store[Router.storeKey];
+     *     const routingResult = context.store[Router.storeKey];
      * });
      * router.get(/^\/echo\/(.*)/, async (context, next) => {
      *     // this will be a `RegExpMatchArray` instance
-     *     const routingResults = context.store[Router.storeKey];
+     *     const routingResult = context.store[Router.storeKey];
      * });
      * ```
      */
