@@ -20,8 +20,12 @@ export class Router {
             return;
         }
         const { routes } = this,
-            { path } = context;
+            { path } = context,
+            { method } = context.request;
         for (let i = 0; i < routes.length; i++) {
+            if (!routes[i].methods.includes(method!)) {
+                continue;
+            }
             const { description } = routes[i],
                 routingResult = typeof description === 'string' ?
                     description === path :
