@@ -6,8 +6,12 @@ const Herver = require('../'),
 const app = new Herver.App(),
     router = new Herver.Router();
 
-router.get('/echo', async context => {
+router.post('/echo', async context => {
     context.endWithContent('' + context.queries.get('msg'));
+});
+
+router.get(/^\/public(.+)/, async context => {
+    context.redirect(context.store[router.storeKey][1]);
 });
 
 router.get(/^\//, Herver.createStaticHandler(join(__dirname, 'public')));

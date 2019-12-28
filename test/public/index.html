@@ -15,10 +15,20 @@
     <nav><a href="/res">/res</a></nav>
     <script type="module" src="./foo.js"></script>
     <script>
-        fetch('./res/data.json')
+        fetch('/public/res/data.json')
             .then(res => res.json())
             .then(data => {
                 console.assert(data.msg === 'test');
+            }, err => {
+                console.error(err);
+            });
+        const POSTOption = {
+            method: 'POST'
+        };
+        fetch('/echo?msg=hello&msg=world', POSTOption)
+            .then(res => res.text())
+            .then(data => {
+                console.assert(data === 'hello,world');
             }, err => {
                 console.error(err);
             });
