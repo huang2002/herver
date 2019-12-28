@@ -1,3 +1,7 @@
+## 0.2.0 - 2019-12-28
+
+- Improve request logger
+
 ### 0.1.1 - 2019-12-28
 
 - Fix route matching
