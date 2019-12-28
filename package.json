@@ -1,36 +1,36 @@
 {
-  "name": "herver",
-  "version": "0.1.0",
-  "description": "A modern server lib",
-  "main": "./dist/index.js",
-  "types": "./typings/index.d.ts",
-  "scripts": {
-    "build": "tsc",
-    "test": "node ./test/index.js"
-  },
-  "repository": "huang2002/herver.git",
-  "keywords": [
-    "herver",
-    "server",
-    "http",
-    "https",
-    "router",
-    "route",
-    "static",
-    "3h"
-  ],
-  "author": "3h",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/huang2002/herver/issues"
-  },
-  "homepage": "https://github.com/huang2002/herver#readme",
-  "devDependencies": {
-    "@types/node": "^12.12.17",
-    "typescript": "^3.7.3"
-  },
-  "files": [
-    "typings",
-    "dist"
-  ]
+    "name": "herver",
+    "version": "0.1.1",
+    "description": "A modern server lib",
+    "main": "./dist/index.js",
+    "types": "./typings/index.d.ts",
+    "scripts": {
+        "build": "tsc",
+        "test": "node ./test/index.js"
+    },
+    "repository": "huang2002/herver.git",
+    "keywords": [
+        "herver",
+        "server",
+        "http",
+        "https",
+        "router",
+        "route",
+        "static",
+        "3h"
+    ],
+    "author": "3h",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/huang2002/herver/issues"
+    },
+    "homepage": "https://github.com/huang2002/herver#readme",
+    "devDependencies": {
+        "@types/node": "^12.12.17",
+        "typescript": "^3.7.3"
+    },
+    "files": [
+        "typings",
+        "dist"
+    ]
 }
