@@ -1,4 +1,5 @@
 import { QueryHandler } from "./App";
+import { STATUS_CODES } from "http";
 
 export namespace Utils {
 
@@ -6,13 +7,15 @@ export namespace Utils {
         const startTimestamp = Date.now();
         await next();
         const endTime = new Date(),
-            deltaTime = endTime.getTime() - startTimestamp;
+            deltaTime = endTime.getTime() - startTimestamp,
+            { statusCode } = context.response;
         console.log(
             `[${endTime.toISOString()}]`,
             context.request.method,
-            context.path,
+            context.request.url,
             '--',
-            context.ended ? context.response.statusCode : NaN,
+            context.ended ? statusCode : NaN,
+            context.ended ? STATUS_CODES[statusCode] : 'Unknown',
             `(used ${deltaTime}ms)`
         );
     };
