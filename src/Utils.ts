@@ -11,7 +11,7 @@ export namespace Utils {
             { statusCode } = context.response;
         console.log(
             `[${endTime.toISOString()}]`,
-            context.request.method,
+            context.request.method!.padEnd(5),
             context.request.url,
             '--',
             context.ended ? statusCode : NaN,
