@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.1
+
+- Fix default page resolving in static handler
+
 ## 0.3.0
 
 - Improve static handler
