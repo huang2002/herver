@@ -4,6 +4,7 @@ import { join } from "path";
 
 export type StaticHandlerOptions = Partial<{
     defaultPage: string | null;
+    methods: string[];
 }>;
 
 export const createStaticHandler = (
@@ -12,6 +13,12 @@ export const createStaticHandler = (
 ): QueryHandler => {
     options = Object.assign({}, createStaticHandler.defaults, options);
     return async context => {
+        if (
+            context.ended
+            || !(options!.methods!.includes(context.request.method!))
+        ) {
+            return;
+        }
         const path = join(root, context.path);
         if (existsSync(path)) {
             if ((await fsPromises.stat(path)).isFile()) {
@@ -29,4 +36,5 @@ export const createStaticHandler = (
 
 createStaticHandler.defaults = {
     defaultPage: 'index.html',
+    methods: ['GET', 'HEAD'],
 } as Required<StaticHandlerOptions>;
