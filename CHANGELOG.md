@@ -1,11 +1,19 @@
-## 0.2.0 - 2019-12-28
+# Changelog
+
+## 0.3.0
+
+- Improve static handler
+- Improve built-in logger
+- Improve docs
+
+## 0.2.0
 
 - Improve request logger
 
-### 0.1.1 - 2019-12-28
+## 0.1.1
 
 - Fix route matching
 
-## 0.1.0 - 2019-12-27
+## 0.1.0
 
 - Initial release
