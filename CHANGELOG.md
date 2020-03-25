@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.0
+
+- Add `terminal` option to static handler
+- Fix docs
+
 ## 0.3.1
 
 - Fix default page resolving in static handler
