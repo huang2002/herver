@@ -336,8 +336,21 @@ interface StaticHandlerOptions {
 
     /**
      * @desc the default page to serve (set this to null if you don't need one)
+     * @default 'index.html'
      */
     defaultPage?: string | null;
+
+    /**
+     * @desc accepted http methods
+     * @defaults ['GET', 'HEAD']
+     */
+    methods: string[];
+
+    /**
+     * @desc whether to respond 404 when no file matches
+     * @default false
+     */
+    terminal: boolean;
 
 }
 
