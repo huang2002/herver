@@ -5,6 +5,7 @@ import { join } from "path";
 export type StaticHandlerOptions = Partial<{
     defaultPage: string | null;
     methods: string[];
+    terminal: boolean;
 }>;
 
 export const createStaticHandler = (
@@ -30,11 +31,14 @@ export const createStaticHandler = (
                 }
             }
         }
-        context.endWithCode(404);
+        if (options!.terminal) {
+            context.endWithCode(404);
+        }
     };
 };
 
 createStaticHandler.defaults = {
     defaultPage: 'index.html',
     methods: ['GET', 'HEAD'],
+    terminal: false,
 } as Required<StaticHandlerOptions>;
