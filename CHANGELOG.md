@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.5.0
+
+- Replace `queryContext.ended` with `queryContext.resolved`
+
 ## 0.4.0
 
 - Add `terminal` option to static handler
