@@ -116,9 +116,13 @@ class QueryContext<T extends {} = any> {
     readonly queries: ReadonlyMap<string, string | string[]>;
 
     /**
-     * @desc whether the response has been ended (literally)
+     * @desc whether the query has been resolved
+     * (the following utility methods will set this property to `true`
+     * automatically, but if you handle a query without them, you'll
+     * need to set this property to `true` to tell other handlers that
+     * this query has been resolved to avoid potential conflict)
      */
-    get ended(): boolean;
+    resolved: boolean;
 
     /**
      * @desc redirect the request (the response will be ended afterwards)

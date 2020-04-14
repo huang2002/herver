@@ -22,7 +22,7 @@ export class QueryContext<T extends {} = any> {
         readonly response: ServerResponse,
         public store: Partial<T> = {}
     ) {
-        const { url } = request as { url: string },
+        const { url } = request as { url: string; },
             queryIndex = url.indexOf('?');
         if (~queryIndex) {
             this.path = url.slice(0, queryIndex);
@@ -38,22 +38,21 @@ export class QueryContext<T extends {} = any> {
     readonly path: string;
     readonly queryString: string;
     readonly queries: ReadonlyMap<string, string | string[]>;
-    private _ended = false;
+    resolved = false;
 
     private _assertWritable() {
+        if (this.resolved) {
+            throw new Error('the query has been resolved');
+        }
         if (this.response.writableEnded) {
             throw new Error('the response has ended');
         }
     }
 
-    get ended() {
-        return this.response.writableEnded || this._ended;
-    }
-
     redirect(location: string, code = 302) {
         this._assertWritable();
         this.response.writeHead(code, { Location: location }).end();
-        this._ended = true;
+        this.resolved = true;
     }
 
     endWithCode(code: number, content?: string) {
@@ -61,7 +60,7 @@ export class QueryContext<T extends {} = any> {
         const { response } = this;
         response.statusCode = code;
         response.end(content);
-        this._ended = true;
+        this.resolved = true;
     }
 
     createOutput(options: CompressionOptions = {}) {
@@ -76,7 +75,7 @@ export class QueryContext<T extends {} = any> {
             encoding = acceptEncoding && compression &&
                 compression.find(e => acceptEncoding.includes(e));
         if (!encoding) {
-            this._ended = true;
+            this.resolved = true;
             return response;
         } else {
             let compressionStream;
@@ -97,7 +96,7 @@ export class QueryContext<T extends {} = any> {
                     throw new Error('unsupported compression encoding');
             }
             compressionStream.pipe(response);
-            this._ended = true;
+            this.resolved = true;
             return compressionStream;
         }
     }

@@ -35,11 +35,11 @@ export class App extends EventEmitter implements Required<AppOptions> {
             }
         };
         next().then(() => {
-            if (!context.ended) {
+            if (!context.resolved) {
                 context.endWithCode(this.defaultCode);
             }
         }, error => {
-            if (!context.ended) {
+            if (!context.resolved) {
                 context.endWithCode(500);
             }
             this.emit('error', error);

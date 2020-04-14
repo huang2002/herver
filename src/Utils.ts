@@ -14,8 +14,8 @@ export namespace Utils {
             context.request.method!.padEnd(5),
             context.request.url,
             '--',
-            context.ended ? statusCode : NaN,
-            context.ended ? STATUS_CODES[statusCode] : 'Unknown',
+            context.resolved ? statusCode : NaN,
+            context.resolved ? STATUS_CODES[statusCode] : 'Unknown',
             `(used ${deltaTime}ms)`
         );
     };

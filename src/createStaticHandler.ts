@@ -15,7 +15,7 @@ export const createStaticHandler = (
     options = Object.assign({}, createStaticHandler.defaults, options);
     return async context => {
         if (
-            context.ended
+            context.resolved
             || !(options!.methods!.includes(context.request.method!))
         ) {
             return;
