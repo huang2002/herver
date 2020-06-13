@@ -2,12 +2,31 @@ import { QueryHandler } from "./App";
 import { existsSync, promises as fsPromises } from "fs";
 import { join } from "path";
 
+/**
+ * The type of static handler options
+ */
 export type StaticHandlerOptions = Partial<{
+    /**
+     * Default page path
+     * @default 'index.html'
+     */
     defaultPage: string | null;
+    /**
+     * Accepted HTTP methods
+     * @defaults ['GET', 'HEAD']
+     */
     methods: string[];
+    /**
+     * Whether to end the request with 404
+     * if no matched pages are found
+     * @default false
+     */
     terminal: boolean;
 }>;
-
+/** dts2md break */
+/**
+ * Create a handler for static files
+ */
 export const createStaticHandler = (
     root = process.cwd(),
     options?: StaticHandlerOptions
@@ -36,7 +55,10 @@ export const createStaticHandler = (
         }
     };
 };
-
+/** dts2md break */
+/**
+ * Default options for `createStaticHandler`
+ */
 createStaticHandler.defaults = {
     defaultPage: 'index.html',
     methods: ['GET', 'HEAD'],

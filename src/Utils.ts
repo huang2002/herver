@@ -1,8 +1,15 @@
 import { QueryHandler } from "./App";
 import { STATUS_CODES } from "http";
 
+/**
+ * Namespace for built-in utilities
+ */
 export namespace Utils {
-
+    /**
+     * A request logger
+     * (use this in your app to log some
+     * basic information of incoming queries)
+     */
     export const requestLogger: QueryHandler = async (context, next) => {
         const startTimestamp = Date.now();
         await next();

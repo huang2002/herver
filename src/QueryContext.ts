@@ -5,18 +5,39 @@ import { createBrotliCompress, ZlibOptions, BrotliOptions, createGzip, createDef
 import { extname } from "path";
 import { mimeTypes } from "./mimeTypes";
 
+/**
+ * Type of compression options
+ */
 export type CompressionOptions = Partial<{
+    /**
+     * Accepted compression encodings (in preferred order)
+     * @defaults ['br', 'gzip', 'deflate']
+     */
     compression: string[] | null;
+    /**
+     * Options for specific encodings
+     */
     zlibOptions: ZlibOptions;
     brotliOptions: BrotliOptions;
 }>;
-
+/** dts2md break */
+/**
+ * Class of query context objects
+ * (usually created internally)
+ */
 export class QueryContext<T extends {} = any> {
-
+    /** dts2md break */
+    /**
+     * Default compression options
+     */
     static compressionDefaults: CompressionOptions = {
         compression: ['br', 'gzip', 'deflate'],
     };
-
+    /** dts2md break */
+    /**
+     * @param request Native(nodejs provided) request object
+     * @param response Native(nodejs provided) response object
+     */
     constructor(
         readonly request: IncomingMessage,
         readonly response: ServerResponse,
@@ -34,12 +55,28 @@ export class QueryContext<T extends {} = any> {
             this.queries = new Map();
         }
     }
-
+    /** dts2md break */
+    /**
+     * The requested path (without query string)
+     */
     readonly path: string;
+    /** dts2md break */
+    /**
+     * The query string (without leading character `?`)
+     */
     readonly queryString: string;
+    /** dts2md break */
+    /**
+     * Parsed queries
+     */
     readonly queries: ReadonlyMap<string, string | string[]>;
+    /** dts2md break */
+    /**
+     * Whether the query has been resolved
+     * (automatically set to `true` when using built-in responding methods)
+     */
     resolved = false;
-
+    /** dts2md break */
     private _assertWritable() {
         if (this.resolved) {
             throw new Error('the query has been resolved');
@@ -48,13 +85,21 @@ export class QueryContext<T extends {} = any> {
             throw new Error('the response has ended');
         }
     }
-
+    /** dts2md break */
+    /**
+     * Redirect the query to the given location
+     * (default code: 302)
+     */
     redirect(location: string, code = 302) {
         this._assertWritable();
         this.response.writeHead(code, { Location: location }).end();
         this.resolved = true;
     }
-
+    /** dts2md break */
+    /**
+     * End the query with the given HTTP code
+     * (with content optionally)
+     */
     endWithCode(code: number, content?: string) {
         this._assertWritable();
         const { response } = this;
@@ -62,7 +107,11 @@ export class QueryContext<T extends {} = any> {
         response.end(content);
         this.resolved = true;
     }
-
+    /** dts2md break */
+    /**
+     * Create an output stream to pipe response content
+     * (this will set `this.resolved` to true)
+     */
     createOutput(options: CompressionOptions = {}) {
         this._assertWritable();
         options = Object.assign({}, QueryContext.compressionDefaults, options);
@@ -100,11 +149,21 @@ export class QueryContext<T extends {} = any> {
             return compressionStream;
         }
     }
-
+    /** dts2md break */
+    /**
+     * End the query with the given content
+     * (with optional compression options)
+     */
     endWithContent(content: string, options: CompressionOptions = {}) {
         this.createOutput(options).end(content);
     }
-
+    /** dts2md break */
+    /**
+     * End the query with the file at the given path
+     * (with optional compression options; MIME type
+     * is automatically detected by the file extension
+     * using the `mimeType` map)
+     */
     endWithFile(path: string, options: CompressionOptions = {}) {
         const ext = extname(path);
         if (mimeTypes.has(ext)) {

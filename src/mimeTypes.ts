@@ -1,4 +1,8 @@
-// From: https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types
+/**
+ * A map of MIME types (some common pairs
+ * are available out of the box)
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types
+ */
 export const mimeTypes = new Map<string, string>([
     ['.aac', 'audio/aac'],
     ['.abw', 'application/x-abiword'],

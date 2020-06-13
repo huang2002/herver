@@ -6,6 +6,7 @@
     "types": "./typings/index.d.ts",
     "scripts": {
         "build": "tsc",
+        "docs": "dts2md \"*\" \"!index.d.ts\" -i typings -o docs -lI Home.md",
         "test": "node ./test/index.js"
     },
     "repository": "huang2002/herver.git",
@@ -27,6 +28,7 @@
     "homepage": "https://github.com/huang2002/herver#readme",
     "devDependencies": {
         "@types/node": "^12.12.17",
+        "dts2md": "^0.4.2",
         "typescript": "^3.7.3"
     },
     "files": [
