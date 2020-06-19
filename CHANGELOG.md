@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.6.0
+
+- Replace `defaultPage` with `defaultPages`
+
 ## 0.5.1
 
 - Fix dir redirect
