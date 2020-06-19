@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.5.1
+
+- Fix dir redirect
+
 ## 0.5.0
 
 - Replace `queryContext.ended` with `queryContext.resolved`
