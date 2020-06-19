@@ -46,7 +46,11 @@ export const createStaticHandler = (
             } else if (options!.defaultPage) {
                 const defaultPagePath = join(path, options!.defaultPage);
                 if (existsSync(defaultPagePath)) {
-                    return context.endWithFile(defaultPagePath);
+                    if (context.path.endsWith('/')) {
+                        return context.endWithFile(defaultPagePath);
+                    } else {
+                        return context.redirect(context.path + '/');
+                    }
                 }
             }
         }
