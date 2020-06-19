@@ -19,9 +19,8 @@
             .then(res => res.json())
             .then(data => {
                 console.assert(data.msg === 'test');
-            }, err => {
-                console.error(err);
-            });
+            })
+            .catch(console.error);
         const POSTOption = {
             method: 'POST'
         };
@@ -29,9 +28,8 @@
             .then(res => res.text())
             .then(data => {
                 console.assert(data === 'hello,world');
-            }, err => {
-                console.error(err);
-            });
+            })
+            .catch(console.error);
     </script>
 </body>
 
