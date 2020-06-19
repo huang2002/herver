@@ -7,10 +7,10 @@ import { join } from "path";
  */
 export type StaticHandlerOptions = Partial<{
     /**
-     * Default page path
-     * @default 'index.html'
+     * Default page pathes
+     * @defaults ['index.html']
      */
-    defaultPage: string | null;
+    defaultPages: string[] | null;
     /**
      * Accepted HTTP methods
      * @defaults ['GET', 'HEAD']
@@ -43,13 +43,16 @@ export const createStaticHandler = (
         if (existsSync(path)) {
             if ((await fsPromises.stat(path)).isFile()) {
                 return context.endWithFile(path);
-            } else if (options!.defaultPage) {
-                const defaultPagePath = join(path, options!.defaultPage);
-                if (existsSync(defaultPagePath)) {
-                    if (context.path.endsWith('/')) {
-                        return context.endWithFile(defaultPagePath);
-                    } else {
-                        return context.redirect(context.path + '/');
+            } else if (options!.defaultPages) {
+                const defaultPages = options!.defaultPages;
+                for (let i = 0; i < defaultPages.length; i++) {
+                    const defaultPagePath = join(path, defaultPages[i]);
+                    if (existsSync(defaultPagePath)) {
+                        if (context.path.endsWith('/')) {
+                            return context.endWithFile(defaultPagePath);
+                        } else {
+                            return context.redirect(context.path + '/');
+                        }
                     }
                 }
             }
@@ -64,7 +67,7 @@ export const createStaticHandler = (
  * Default options for `createStaticHandler`
  */
 createStaticHandler.defaults = {
-    defaultPage: 'index.html',
+    defaultPages: ['index.html'],
     methods: ['GET', 'HEAD'],
     terminal: false,
 } as Required<StaticHandlerOptions>;
